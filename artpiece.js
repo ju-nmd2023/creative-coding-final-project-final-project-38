@@ -29,7 +29,8 @@ function draw() {
   for (let p of backgroundParticles) {
     let angle =
       (noise(p.x * noiseScale, p.y * noiseScale, frameCount * 0.01) * PI) / 4;
-    let speed = 0.2;
+
+    let speed = 0.3;
     p.x += cos(angle) * speed;
     p.y += sin(angle) * speed;
 
@@ -46,21 +47,39 @@ function draw() {
   const divider = 970;
   // noiseSeed(1);
 
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 4; i++) {
     let xoff = start + i * 4000;
     let baseY = originalY + i * 100 + noise(xoff) * 110;
     noStroke();
-
     if (i === 0) {
       //  fill(122, 178, 211);
-      fill(99, 108, 203);
-    } // dark water
+      fill(3, 42, 89);
+    } // #1  wave
     else if (i === 1) {
-      fill(110, 140, 251);
-    } // lighter water
+      //  fill(122, 178, 211);
+      fill(18, 74, 140);
+    } // #2  wave
     else if (i === 2) {
+      fill(32, 103, 189);
+    } // #3  wave
+    else if (i === 3) {
       fill(227, 203, 172);
-    } // lighter water
+    } // Sand
+
+    // if (i === 0) {
+    //   //  fill(122, 178, 211);
+    //   fill(99, 108, 203);
+    // } // dark water
+    // else if (i === 1) {
+    //   fill(110, 140, 251);
+    // } // lighter water
+    // else if (i === 2) {
+    //   fill(227, 203, 172);
+    // } // lighter water
+    // if (i === 3) {
+    //   //  fill(122, 178, 211);
+    //   fill(27, 26, 85);
+    // } // dark water
 
     beginShape();
 
@@ -139,7 +158,7 @@ class Latern {
     noStroke();
     fill(250, 240, 145);
     // ellipse(this.x, this.y + 10, 20, 53);
-    rect(this.x - 25, this.y , 50, 60, 20);
+    rect(this.x - 25, this.y, 50, 60, 20);
 
     //bottom part
     fill(79, 32, 13);
