@@ -2,7 +2,7 @@
 //Mix of Garrite's noiseexample lecture recording and coding train youtube channel
 //Lantern base inspo:https://www.youtube.com/watch?v=UcdigVaIYAk
 //Firework:https://www.youtube.com/watch?v=DxDn2u7sQuI
-// Citation music background copyright free: https://www.youtube.com/watch?v=-CD2G9m7JEw
+// MuisPlayer: music background copyright free: https://www.youtube.com/watch?v=-CD2G9m7JEw
 
 const size = 160;
 const layers = 10;
@@ -27,6 +27,7 @@ function setup() {
   createCanvas(window.innerWidth, window.innerHeight);
 
   //load mp3 here-----
+  //firework sound mine and musicPlayer copyright free
   fireworkPlayer = new Tone.Player("sounds/firework.mp3").toDestination();
   musicPlayer = new Tone.Player("sounds/music.mp3").toDestination();
   // Initialize flow field particles
@@ -51,8 +52,7 @@ function setup() {
 }
 
 function draw() {
-  // background(223, 242, 235);
-  // background(60, 70, 123);
+  
   background(0);
   // -------Flow field background (alive)
   stroke(255, 234, 172); // glowing stars color
@@ -63,13 +63,13 @@ function draw() {
       (noise(p.x * noiseScale, p.y * noiseScale, frameCount * 0.01) * PI) / 4;
 
     let speed = 0.3;
-    p.x += cos(angle) * speed;
-    p.y += sin(angle) * speed;
+    p.x -= cos(angle) * speed;
+    p.y -= sin(angle) * speed;
 
     point(p.x, p.y);
 
     // Wrap around edges
-    if (p.x > width) p.x = 0;
+    if (p.x < 0) p.x = width;
     if (p.y < 0) p.y = height;
     if (p.y > height) p.y = 0;
   }
@@ -77,18 +77,15 @@ function draw() {
   //------wavesss-----
   const originalY = 200; //the base line
   const divider = 970;
-  // noiseSeed(1);
 
   for (let i = 0; i < 4; i++) {
     let xoff = start + i * 4000;
     let baseY = originalY + i * 100 + noise(xoff) * 110;
     noStroke();
     if (i === 0) {
-      //  fill(122, 178, 211);
       fill(3, 42, 89);
     } // #1  wave
     else if (i === 1) {
-      //  fill(122, 178, 211);
       fill(18, 74, 140);
     } // #2  wave
     else if (i === 2) {
@@ -113,9 +110,7 @@ function draw() {
     //Moon
     push();
     noStroke();
-    // fill(255, 231, 151);
-    // fill(227, 237, 252);
-    // fill(201, 201, 201);
+    
     fill(180, 180, 180);
     ellipse(300, 100, 150, 150);
     pop();
@@ -137,8 +132,6 @@ function draw() {
     ellipse(320, 145, 10, 10);
     ellipse(277, 70, 20, 20);
     ellipse(250, 90, 20, 20);
-    // ellipse(270, 130, 20, 20);
-
 
     pop();
   }
@@ -195,9 +188,8 @@ class Latern {
     this.angle += 0.05; //animate wave motion
   }
 
-  //   lantern palette fill(254, 174, 85)(252,224,89)(255,255,125)
 
-  //lantern
+  //lantern-----
 
   show() {
     //big circle
@@ -299,7 +291,6 @@ class ParticleFire {
   constructor(x, y, isRocket, color = random(FIREWORK_COLORS)) {
     this.pos = createVector(x, y);
     this.isRocket = isRocket;
-    // this.hue = hue;
     this.color = color;
 
     //chatgpt solution
@@ -330,7 +321,6 @@ class ParticleFire {
 
   show() {
     strokeWeight(this.isRocket ? 9 : 5);
-    // stroke(this.hue, 255, 255, this.alpha);
     stroke(this.color[0], this.color[1], this.color[2], this.alpha);
     point(this.pos.x, this.pos.y);
   }
