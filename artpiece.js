@@ -63,8 +63,8 @@ function draw() {
       (noise(p.x * noiseScale, p.y * noiseScale, frameCount * 0.01) * PI) / 4;
 
     let speed = 0.3;
-    p.x -= cos(angle) * speed;
-    p.y -= sin(angle) * speed;
+    p.x += cos(angle) * speed;
+    p.y += sin(angle) * speed;
 
     point(p.x, p.y);
 
